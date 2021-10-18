@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shortener'
+    'shortener',
+    'django_countries',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    'django_user_agents.middleware.UserAgentMiddleware',
+    ]
 
 ROOT_URLCONF = 'django_url_shortener.urls'
 
@@ -126,3 +129,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#GEO LIB CONFIG
+
+GEOIP_PATH=os.path.join(BASE_DIR,"geolib")
+
+#USER_AGENT CONFIG
+
+USER_AGENTS_CACHE = None

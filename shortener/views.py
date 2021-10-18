@@ -2,10 +2,10 @@ from django.http.response import Http404
 from django.db.utils import IntegrityError
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
-from .models import ShortUrl
+from .models import ShortUrl,Visit
 from .forms import ShortenerForm
 from .utils import create_alias
-
+from django.contrib.gis.geoip2 import GeoIP2
 def home_view(request):
     """
     Renders the index page which has the shortener form.
@@ -21,7 +21,18 @@ def redirect_view(request, alias):
     """
     try:
         short = ShortUrl.objects.get(alias=alias)
-        short.visits += 1
+        short.number_of_visits+=1
+        #detect geoloc
+        g=GeoIP2()
+        IP_address=request.META["REMOTE_ADDR"]
+        try:
+            country_code=g.country(IP_address)["country_code"]
+        except :
+            country_code="localhost"
+        #detect device
+        os=request.user_agent.os.family 
+        short.visits.create(country=country_code,os=os)
+        
         short.save()
         page_data = {
             'redirect_url': short.long_url,
