@@ -31,7 +31,7 @@ def redirect_view(request, alias):
             country_code="localhost"
         #detect device
         os=request.user_agent.os.family 
-        short.visits.create(country=IP,os=os)
+        short.visits.create(country=IP_address,os=os)
         
         short.save()
         page_data = {
