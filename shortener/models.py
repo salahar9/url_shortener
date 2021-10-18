@@ -16,9 +16,9 @@ class ShortUrl(models.Model):
 class Visit(models.Model):
     
     url = models.ForeignKey('ShortUrl',on_delete=models.CASCADE,related_name="visits")
-    country=models.CharField(max_length=250)
+    country=CountryField()
     date_of_visit=models.DateTimeField(auto_now=True)
-    os=CountryField(max_length=50) 
+    os=models.CharField(max_length=50) 
     class Meta:
         verbose_name="Link stat"
         verbose_name_plural="Stats"
