@@ -4,12 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-asgiref = "*"
-pytz = "*"
-sqlparse = "*"
-Django = "*"
+asgiref = "==3.4.1"
+django = "==3.2.7"
+pytz = "==2021.1"
+sqlparse = "==0.4.2"
+geoip2 = "*"
+django-countries = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
